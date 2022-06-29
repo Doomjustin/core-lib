@@ -2,19 +2,20 @@
 #define DOOM_CORE_LIB_TYPE_TRAITS_H
 
 #include <cstddef>
+#include <type_traits>
 
 
 namespace doom {
 
-template<bool Condtion, typename T>
+template<bool Condtion, typename T = void>
 struct enable_if {};
 
 template<typename T>
-struct enable_if<false, T> {
+struct enable_if<true, T> {
   using type = T;
 };
 
-template<bool Condition, typename T>
+template<bool Condition, typename T = void>
 using enable_if_t = typename enable_if<Condition, T>::type;
 
 
@@ -52,6 +53,14 @@ size_t array_size(T (&)[N])
 {
   return N;
 }
+
+
+// 是否能单例化
+template<typename T, typename... Args>
+using is_singletonable = std::enable_if_t<
+      !std::is_copy_assignable_v<T> &&
+      !std::is_copy_constructible_v<T> &&
+      std::is_constructible_v<T, Args...>, bool>;
 
 } // namespace doom
 
