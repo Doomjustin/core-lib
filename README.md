@@ -9,8 +9,8 @@
 
 
 namespace doom {
-  
+
 } // namespace doom
 
-#endif DOOM_CORE_LIB_TEMPLATE_H
+#endif // DOOM_CORE_LIB_TEMPLATE_H
 ```
