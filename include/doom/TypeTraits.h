@@ -1,6 +1,8 @@
 #ifndef DOOM_CORE_LIB_TYPE_TRAITS_H
 #define DOOM_CORE_LIB_TYPE_TRAITS_H
 
+#include <cstddef>
+
 
 namespace doom {
 
@@ -44,6 +46,12 @@ struct select<0, T, Cases...> {
 template<unsigned N, typename... Cases>
 using select_t = typename select<N, Cases...>::type;
 
+
+template<typename T, size_t N>
+size_t array_size(T (&)[N])
+{
+  return N;
+}
 
 } // namespace doom
 
